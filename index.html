@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>余升桔 - 个人简历</title>
+    <style>
+        :root {
+            --bg: #fafafa;
+            --card: #ffffff;
+            --text: #1a1a2e;
+            --text-secondary: #555;
+            --accent: #4f46e5;
+            --accent-light: #eef2ff;
+            --border: #e5e7eb;
+            --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --radius: 12px;
+        }
+        [data-theme="dark"] {
+            --bg: #0f0f1a;
+            --card: #1a1a2e;
+            --text: #e5e7eb;
+            --text-secondary: #9ca3af;
+            --accent: #818cf8;
+            --accent-light: #1e1b4b;
+            --border: #2d2d44;
+            --shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: var(--bg); color: var(--text);
+            line-height: 1.6; transition: background 0.3s, color 0.3s;
+        }
+        nav {
+            position: sticky; top: 0; z-index: 100;
+            background: var(--card); border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+        }
+        [data-theme="dark"] nav { background: rgba(15,15,26,0.85); }
+        .nav-inner {
+            max-width: 960px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 24px; height: 56px;
+        }
+        .nav-logo { font-size: 1.25rem; font-weight: 700; color: var(--accent); }
+        .nav-links { display: flex; gap: 28px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--accent); }
+        .theme-toggle {
+            background: none; border: 1px solid var(--border);
+            border-radius: 20px; padding: 6px 12px;
+            cursor: pointer; font-size: 0.85rem; color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+        .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+        .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+        section { padding: 60px 0; }
+        section:not(:last-child) { border-bottom: 1px solid var(--border); }
+        .section-title {
+            font-size: 0.8rem; text-transform: uppercase;
+            letter-spacing: 2px; color: var(--accent);
+            margin-bottom: 32px; font-weight: 600;
+        }
+        .hero { padding-top: 80px; padding-bottom: 50px; }
+        .hero-content { display: flex; align-items: center; gap: 40px; }
+        .avatar {
+            width: 200px; height: 200px; border-radius: 50%;
+            background: linear-gradient(135deg, #4f46e5, #818cf8);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem; color: #fff; font-weight: 700; flex-shrink: 0;
+        }
+        .hero-info h1 { font-size: 2.4rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 4px; }
+        .hero-info .tagline { font-size: 1.1rem; color: var(--accent); font-weight: 500; margin-bottom: 12px; }
+        .hero-info .bio { color: var(--text-secondary); max-width: 480px; margin-bottom: 16px; }
+        .contact-row { display: flex; gap: 16px; flex-wrap: wrap; }
+        .contact-item { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+        .contact-item:hover { color: var(--accent); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+        .card {
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 24px;
+            box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .timeline { position: relative; padding-left: 28px; }
+        .timeline::before { content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 2px; background: var(--border); }
+        .timeline-item { position: relative; margin-bottom: 32px; }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -24px; top: 8px;
+            width: 10px; height: 10px; border-radius: 50%;
+            background: var(--accent); border: 2px solid var(--bg);
+        }
+        .timeline-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+        .timeline-header h3 { font-size: 1.05rem; font-weight: 700; }
+        .timeline-header .date { font-size: 0.8rem; color: var(--text-secondary); background: var(--accent-light); padding: 2px 10px; border-radius: 12px; }
+        .timeline-item .subtitle { color: var(--accent); font-size: 0.9rem; margin: 2px 0 8px; }
+        .timeline-item .desc { color: var(--text-secondary); font-size: 0.9rem; }
+        .skill-group { margin-bottom: 20px; }
+        .skill-group:last-child { margin-bottom: 0; }
+        .skill-group h4 { font-size: 0.85rem; margin-bottom: 10px; color: var(--text-secondary); font-weight: 500; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .skill-tag { background: var(--accent-light); color: var(--accent); padding: 5px 14px; border-radius: 16px; font-size: 0.82rem; font-weight: 500; }
+        .edu-item { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-bottom: 16px; }
+        .edu-item:last-child { margin-bottom: 0; }
+        .edu-item h3 { font-size: 1rem; font-weight: 700; }
+        .edu-item .date { font-size: 0.8rem; color: var(--text-secondary); }
+        .edu-item .school { color: var(--accent); font-size: 0.9rem; }
+        .project-card { margin-bottom: 16px; }
+        .project-card:last-child { margin-bottom: 0; }
+        .project-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+        .project-card .desc { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 8px; }
+        .project-links { display: flex; gap: 12px; }
+        .project-links a { font-size: 0.82rem; color: var(--accent); text-decoration: none; font-weight: 500; }
+        .project-links a:hover { text-decoration: underline; }
+        footer { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 0.82rem; }
+        @media print { nav, .theme-toggle { display: none; } body { background: #fff; color: #000; } section { padding: 20px 0; break-inside: avoid; } }
+        @media (max-width: 768px) {
+            .hero-content { flex-direction: column; text-align: center; }
+            .hero-info .bio { max-width: 100%; }
+            .contact-row { justify-content: center; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .hero { padding-top: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <span class="nav-logo">Resume</span>
+        <ul class="nav-links">
+            <li><a href="#about">关于</a></li>
+            <li><a href="#experience">经历</a></li>
+            <li><a href="#skills">技能</a></li>
+            <li><a href="#campus">校园</a></li>
+            <li><a href="#education">学历</a></li>
+        </ul>
+        <button class="theme-toggle" onclick="toggleTheme()">🌓 主题</button>
+    </div>
+</nav>
+
+<main class="container">
+
+    <!-- Hero -->
+    <section class="hero" id="about">
+        <div class="hero-content">
+            <div class="avatar" style="border-radius:16px;overflow:hidden;background:none;">
+                <img src="个人照片.jpg" alt="余升桔" style="width:100%;height:100%;object-fit:contain;">
+            </div>
+            <div class="hero-info">
+                <h1>余升桔</h1>
+                <p class="tagline">环境艺术设计师</p>
+                <p class="bio">
+                    擅长运用多种设计软件进行排版、制图、模型制作、渲染、动画制作及办公报价等工作。
+                    善于跨学科综合思考，能够结合艺术与技术，将创新想法转化为实际项目，并不断进行迭代和改进。
+                    具备AI工具本地部署及联动应用能力，持续探索前沿技术在设计领域的融合应用。
+                </p>
+                <div class="contact-row">
+                    <span class="contact-item">� +86 18723027245</span>
+                    <span class="contact-item">📧 3250140670@qq.com</span>
+                    <span class="contact-item">💬 微信: A_xiao_guo_tu</span>
+                    <span class="contact-item">🐧 QQ: 3250140670</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+        <h2 class="section-title">工作经历</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <h3>包装结构工程师</h3>
+                    <span class="date">2025.3 - 2026.3</span>
+                </div>
+                <p class="subtitle">重庆帛门智能科技有限公司</p>
+                <p class="desc">
+                    负责全品类产品包装结构设计与方案制定，涵盖纸箱、彩盒、缓冲内衬、托盒、异型结构等，独立完成从构思、建模、出图到打样验证的全流程。熟练使用ArtiosCAD、AutoCAD、AI等软件完成刀线图、结构图及装配动画制作。根据产品特性与运输要求进行包装防护结构优化，降低破损率与材料成本。参与材料选型测试，协同生产、供应链、品质等跨部门推进项目落地。
+                </p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <h3>制图设计师</h3>
+                    <span class="date">2024.6 - 2025.3</span>
+                </div>
+                <p class="subtitle">成都星空物语</p>
+                <p class="desc">
+                    负责效果图与施工图绘制，运用CAD、天正、超绘、SU、3ds Max、V-Ray、D5渲染器制定设计方案并制作PPT展示。完成装修预算编制，确保资金合理分配。运用AI、剪映、AE、PR、AU、ME进行图片视频剪辑，并运用3ds Max完成折幕视频转换。运用DCC/PS/CCK本地部署及API方式接入Office等软件进行文档快速处理。
+                </p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <h3>设计师助理</h3>
+                    <span class="date">2023.6 - 2023.8</span>
+                </div>
+                <p class="subtitle">华浔</p>
+                <p class="desc">
+                    协助设计师进行房屋现场勘测，收集准确信息与尺寸数据。陪同设计师与客户沟通需求，确保方案符合客户期望。协助寻找装修材料，运用CAD、SU绘制图纸，制定设计方案并制作PPT清晰展示设计思路与效果。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+        <h2 class="section-title">专业技能</h2>
+        <div class="grid-2">
+            <div>
+                <div class="skill-group">
+                    <h4>设计建模</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">3ds Max</span>
+                        <span class="skill-tag">SketchUp</span>
+                        <span class="skill-tag">AutoCAD</span>
+                        <span class="skill-tag">雅图CAD</span>
+                        <span class="skill-tag">PS</span>
+                        <span class="skill-tag">AI</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h4>渲染器</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">V-Ray</span>
+                        <span class="skill-tag">Corona</span>
+                        <span class="skill-tag">D5渲染器</span>
+                        <span class="skill-tag">Enscape</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h4>粒子/特效</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">火凤凰</span>
+                        <span class="skill-tag">tyFlow粒子</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="skill-group">
+                    <h4>视频/后期</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AE</span>
+                        <span class="skill-tag">PR</span>
+                        <span class="skill-tag">AU</span>
+                        <span class="skill-tag">ME</span>
+                        <span class="skill-tag">剪映</span>
+                        <span class="skill-tag">ffmpeg</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h4>办公/报价</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Office</span>
+                        <span class="skill-tag">智云达</span>
+                        <span class="skill-tag">奥贝特</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h4>AI工具</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">DeepSeek</span>
+                        <span class="skill-tag">千问</span>
+                        <span class="skill-tag">本地部署</span>
+                        <span class="skill-tag">联动应用</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Campus -->
+    <section id="projects">
+        <h2 class="section-title">在校经历</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <h3>综合材料绘画创作</h3>
+                    <span class="date">2021.9 - 2023.5</span>
+                </div>
+                <p class="subtitle">绘画项目</p>
+                <p class="desc">协助完成32幅综合材料绘画作品（每幅价值数万至十多万不等），积累丰富的艺术创作与材料运用经验。</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <h3>社区墙绘 & 毕业会展布置</h3>
+                    <span class="date">2023.3 - 2023.5</span>
+                </div>
+                <p class="subtitle">重庆市沙坪坝区陈家桥</p>
+                <p class="desc">完成社区墙绘共3幅，包括小区实景调查、主题考察选定、PS效果图制作及实地绘画。参与毕业会展布置工作。</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <h3>第四届香港大学生当代艺术设计比赛 · 银奖</h3>
+                    <span class="date">2021.9 - 2022.2</span>
+                </div>
+                <p class="subtitle">作品《幻梦》</p>
+                <p class="desc">利用纸、羽毛、喷漆等综合材料，创作将自然与梦幻结合的艺术作品《幻梦》，荣获银奖。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+        <h2 class="section-title">教育背景</h2>
+        <div class="edu-item">
+            <div>
+                <h3>环境艺术设计 · 专科</h3>
+                <p class="school">重庆市建筑科技职业学院</p>
+            </div>
+            <span class="date">2021.9 - 2024.6</span>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>© 2026 余升桔 · 个人简历</p>
+</footer>
+
+<script>
+function toggleTheme() {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-theme');
+    const next = current === 'dark' ? '' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+}
+const saved = localStorage.getItem('theme');
+if (saved) document.documentElement.setAttribute('data-theme', saved);
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+});
+</script>
+</body>
+</html>
